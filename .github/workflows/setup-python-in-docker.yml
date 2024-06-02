@@ -3,9 +3,11 @@ on: [push]
 jobs:
     setup-python-in-docker:
         runs-on: ubuntu-latest
+        container:
+            image: guptapankaj831/github-actions-examples@main
         steps:
-            - name: Run Action
-              uses: guptapankaj831/github-actions-examples@main
+            # - name: Run Action
+            #   uses: guptapankaj831/github-actions-examples@main
             - uses: actions/checkout@v4
             - run: poetry install
             - run: poetry run black .
