@@ -4,11 +4,12 @@ jobs:
     setup-python-in-docker:
         runs-on: ubuntu-latest
         container:
-            image: guptapankaj831/github-actions-examples/Dockerfile
+            image: python:latest # guptapankaj831/github-actions-examples/Dockerfile
         steps:
             # - name: Run Action
             #   uses: guptapankaj831/github-actions-examples@main
             - uses: actions/checkout@v4
+            - run: pip install flake8 pytest black poetry
             - run: poetry install
             - run: poetry run black .
             - run: poetry run flake8 .
