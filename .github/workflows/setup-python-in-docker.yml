@@ -4,7 +4,7 @@ jobs:
     setup-python-in-docker:
         runs-on: ubuntu-latest
         container:
-            image: ./Dockerfile
+            image: ./
         steps:
             # - name: Run Action
             - uses: actions/checkout@v4
