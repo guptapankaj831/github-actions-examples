@@ -6,7 +6,7 @@ jobs:
         steps:
             - name: Run Action
               uses: guptapankaj831/github-actions-examples@main
-            - uses: actions/checkoutt@v4
+            - uses: actions/checkout@v4
             - run: poetry install
             - run: poetry run black .
             - run: poetry run flake8 .
