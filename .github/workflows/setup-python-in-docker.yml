@@ -8,7 +8,7 @@ jobs:
         steps:
             # - name: Run Action
             - uses: actions/checkout@v4
-            - uses: guptapankaj831/github-actions-examples@main
+            # - uses: guptapankaj831/github-actions-examples@main
             - run: poetry run black .
             - run: poetry run flake8 .
             - run: poetry run bandit --ini .bandit -r
