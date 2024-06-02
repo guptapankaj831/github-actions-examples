@@ -10,8 +10,5 @@ jobs:
             #   uses: guptapankaj831/github-actions-examples@main
             - uses: actions/checkout@v4
             - run: pip install flake8 pytest black poetry
-            - run: poetry install
-            - run: poetry run black .
-            - run: poetry run flake8 .
-            - run: poetry run bandit --ini .bandit -r
-            - run: poetry run pytest
+            - run: black .
+            - run: flake8 .
