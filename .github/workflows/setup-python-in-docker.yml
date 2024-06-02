@@ -1,0 +1,14 @@
+name: Setup Python in Docker
+on: [push]
+jobs:
+    setup-python-in-docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run Action
+              uses: guptapankaj831/github-actions-examples@main
+            - uses: actions/checkoutt@v4
+            - run: poetry install
+            - run: poetry run black .
+            - run: poetry run flake8 .
+            - run: poetry run bandit --ini .bandit -r
+            - run: poetry run pytest
