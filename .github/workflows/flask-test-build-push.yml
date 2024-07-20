@@ -1,5 +1,8 @@
 name: Flask Code Test, Build and Push to Docker Hub
 on: [push]
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 jobs:
     test_code:
         runs-on: ubuntu-latest
@@ -33,14 +36,15 @@ jobs:
             - name: login to docker registry
               uses: docker/login-action@v3
               with:
+                registry: ${{ env.REGISTRY }}
                 username: ${{secrets.DOCKERHUB_USERNAME}}
                 password: ${{secrets.DOCKERHUB_TOKEN}}
 
-            # - name: Extract metadata (tags, labels) for Docker
-              # id: meta
-              # uses: docker/metadata-action@v5
-              # with:
-              #  images: guptapankaj831/github-actions-examples
+            - name: Extract metadata (tags, labels) for Docker
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+               images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
             - name: build and push docker image to registry
               id: push
@@ -48,8 +52,9 @@ jobs:
               with:
                 context: .
                 push: true
-                tags: gupta831/demo3:latest 
-                # tags: gupta831/${{ steps.meta.outputs.tags }}
+                # tags: gupta831/demo3:latest 
+                tags: ${{ steps.meta.outputs.tags }}
+                labels: ${{ steps.meta.outputs.labels }}
             
             - name: Generate artifact attestation
               uses: actions/attest-build-provenance@v1
