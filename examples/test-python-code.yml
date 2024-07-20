@@ -3,8 +3,6 @@ on: [push]
 jobs:
     test_code:
         runs-on: ubuntu-latest
-#        container:
-#          image: python:latest
         steps:
             - name: check repository
               uses: actions/checkout@v4
@@ -18,4 +16,5 @@ jobs:
                 flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
                 flake8 jupytext tests
                 flake8 . --count --exit-zero --max-complexity=10 --statistics
+        
 

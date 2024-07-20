@@ -1,4 +1,8 @@
 FROM python:latest
-RUN pip install flake8 pytest black poetry
-# CMD ["/usr/bin/bash"]
-ENTRYPOINT /usr/bin/bash
+WORKDIR /app
+COPY ./requirements.txt /app
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 5000
+ENV FLASK_APP=my_flask.py
+CMD ["flask", "run", "--host", "0.0.0.0"]
