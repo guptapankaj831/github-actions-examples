@@ -3,8 +3,8 @@ on: [push]
 jobs:
     test_code:
         runs-on: ubuntu-latest
-        container:
-          image: python:latest
+#        container:
+#          image: python:latest
         steps:
             - name: check repository
               uses: actions/checkout@v4
