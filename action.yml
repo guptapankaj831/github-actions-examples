@@ -1,5 +1,0 @@
-name: 'Custom Action'
-description: 'Run Action for Python Setup in Docker'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
