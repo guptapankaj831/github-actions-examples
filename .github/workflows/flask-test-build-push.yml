@@ -21,6 +21,11 @@ jobs:
         needs: test_code
         name: push docker image to hub
         runs-on: ubuntu-latest
+        permissions:
+          packages: write
+          contents: read
+          attestations: write
+          id-token: write
         steps:
             - name: check repository
               uses: actions/checkout@v4
@@ -31,11 +36,11 @@ jobs:
                 username: ${{secrets.DOCKERHUB_USERNAME}}
                 password: ${{secrets.DOCKERHUB_TOKEN}}
 
-            # - name: Extract metadata (tags, labels) for Docker
-             # id: meta
-             # uses: docker/metadata-action@v5
-             # with:
-              # images: guptapankaj831/github-actions-examples
+            - name: Extract metadata (tags, labels) for Docker
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+               images: guptapankaj831/github-actions-examples
 
             - name: build and push docker image to registry
               id: push
@@ -43,8 +48,8 @@ jobs:
               with:
                 context: .
                 push: true
-                tags: gupta831/demo1:latest 
-                # tags: gupta831/${{ steps.meta.outputs.tags }}
+                # tags: gupta831/demo1:latest 
+                tags: gupta831/${{ steps.meta.outputs.tags }}
             
             - name: Generate artifact attestation
               uses: actions/attest-build-provenance@v1
